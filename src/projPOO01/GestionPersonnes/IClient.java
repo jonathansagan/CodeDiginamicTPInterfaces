@@ -6,6 +6,12 @@ import projPOO01.GestionAchat.Achat;
 
 public interface IClient {
 	public void achete(List<Achat> listachat);
-	public boolean paie();
-	public boolean isClient();
+
+	public default boolean paie() {
+		return false;
+	}
+
+	public default boolean isClient() {
+		return false;
+	}
 }

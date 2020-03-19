@@ -1,6 +1,10 @@
 package projPOO01.saisie;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,6 +24,9 @@ import projPOO01.GestionPersonnes.Salarie;
 import projPOO01.Menu.Menus;
 
 public class Saisir {
+	static Instant instantdebut = Instant.now();
+	static ZoneId currentZone = ZoneId.of("Europe/Paris");  
+	
 	public static Patron patron = new Patron();
 	public static ArrayList<Personne> listclient = new ArrayList<Personne>();
 	public static ArrayList<Personne> listsalarie = new ArrayList<Personne>();
@@ -32,6 +39,12 @@ public class Saisir {
 		Saisir.SaisirFournisseur();
 		Saisir.SaisirPatron();
 		Menus.Menu();
+	}
+	private static void tempsSaisie(){
+		Instant instantf = Instant.now();
+		System.out.println("Date de début de saisie : " + ZonedDateTime.ofInstant(instantdebut, currentZone));
+		System.out.println("Date de fin de saisie : " + ZonedDateTime.ofInstant(instantf, currentZone));
+		System.out.println("La durée totale de saisie est : " + Duration.between(instantf, instantdebut).getSeconds()+"secondes");
 	}
 	
 	
@@ -354,6 +367,7 @@ public class Saisir {
 	}
 	
 	public static ArrayList<commande> SaisirCommande(){
+		Instant instantf = Instant.now(); 
 		ArrayList<commande> cmd = new ArrayList<commande>();
 		Date d = null; 
 		String intitule;
@@ -405,6 +419,7 @@ public class Saisir {
 			 }else {
 				 b=false;
 			 }
+			 tempsSaisie();
 		}
 		
 		return cmd;
